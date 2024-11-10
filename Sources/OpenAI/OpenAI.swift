@@ -205,6 +205,10 @@ extension OpenAI {
         components.host = configuration.host
         components.port = configuration.port
         components.path = configuration.prefix + path
+        // If path is /chat/completions and prefix is not empty, then will use prefix only!
+        if path == APIPath.chats && !configuration.prefix.isEmpty {
+            components.path = configuration.prefix
+        }
         return components.url!
     }
 }
